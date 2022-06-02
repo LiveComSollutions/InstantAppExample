@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.livecom.instantappexample">
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.livecom.instantappexample"
+    android:targetSandboxVersion="2">
+
+    <dist:module dist:instant="true" />
 
     <application
         android:allowBackup="true"
@@ -14,13 +18,27 @@
         android:theme="@style/Theme.InstantAppExample"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".MyActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="{paste_your_domain_here}" />
+            </intent-filter>
+
+            <meta-data
+                android:name="default-url"
+                android:value="{paste_your_app_link_here}" />
         </activity>
     </application>
 
